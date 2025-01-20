@@ -1,0 +1,22 @@
+{
+  "name": "flavorfusion",
+  "version": "1.0.0",
+  "description": "FlavorFusion is a one stop food website for foodies of all age group!",
+  "main": "index.js",
+  "scripts": {
+    "start": "parcel src/index.html"
+  },
+  "keywords": [
+    "FlavorFusion"
+  ],
+  "author": "Rahul Goli",
+  "license": "ISC",
+  "devDependencies": {
+    "parcel": "^2.13.3",
+    "process": "^0.11.10"
+  },
+  "dependencies": {
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0"
+  }
+}
