@@ -1,12 +1,17 @@
-export const RestaurantCard = ({resCard}) => {
-    const { resName,cuisine, rating, eta } = resCard;
-    return (
-        <div className="res-card">
-            <img className ="res-img" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS7b1YGeYTG80V38a7shQ7z6AuFSUjv7hPU1nYTOP9BJA4i6OCUMHQBe70s17IrKo1Rt90&usqp=CAU"/>
-            <h3>{resName}</h3>
-            <h4>{cuisine.join(", ")}</h4>
-            <h4>{rating + " star"}</h4>
-            <h4>{eta}</h4>
-        </div>
-    )
-}
+const RestaurantCard = ({ resCard }) => {
+  const { name, cuisines, avgRating, sla, cloudinaryImageId } = resCard;
+  return (
+    <div className="res-card">
+      <img
+        className="res-img"
+        src={`https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_660/${cloudinaryImageId}`}
+      />
+      <h3>{name}</h3>
+      <h4>{cuisines.join(", ")}</h4>
+      <h4>{avgRating + " star"}</h4>
+      <h4>{sla.deliveryTime}</h4>
+    </div>
+  );
+};
+
+export default RestaurantCard;
