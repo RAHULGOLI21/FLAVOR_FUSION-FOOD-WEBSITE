@@ -1,6 +1,7 @@
 import RestaurantCard from "./RestaurantCard";
 import { useState, useEffect } from "react";
 import ShimmerUI from "./ShimmerUI";
+import { Link } from "react-router-dom";
 
 // Whenever state variables update, react triggers reconsiliation cycle(re-renders the whole components)
 const Body = () => {
@@ -12,6 +13,9 @@ const Body = () => {
 
   const [searchText, setSearchText] = useState("");
 
+  // If the dependency array parameter is not given then => useEffect is called after everytime Component is rendered.
+  // If the dependency array is empty [] => useEffect is called only during the initial rendering.
+  // If the dependency array is given [searchText] => useEffect is caled only when the state of the dependencies changes.
   useEffect(() => {
     fetchData();
   }, []);
@@ -21,11 +25,7 @@ const Body = () => {
       `https://www.swiggy.com/dapi/restaurants/list/v5?lat=17.4400802&lng=78.3489168&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING`
     );
     const apiData = await data.json();
-    console.log(
-      "apiData ---",
-      apiData?.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle
-        ?.restaurants
-    );
+
     setListOfRestaurants(
       apiData?.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle
         ?.restaurants
@@ -87,10 +87,15 @@ const Body = () => {
           // Later if any searching is applied then also we only redering the same "filteredRestaurants".
           filteredRestaurants.map((restaurant) => {
             return (
-              <RestaurantCard
+              <Link
+                to={"/restaurant/" + restaurant.info.id}
                 key={restaurant.info.id}
-                resCard={restaurant.info}
-              />
+              >
+                <RestaurantCard
+                  key={restaurant.info.id}
+                  resCard={restaurant.info}
+                />
+              </Link>
             );
           })
         }
