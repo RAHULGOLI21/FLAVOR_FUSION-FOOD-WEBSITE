@@ -71,3 +71,9 @@
      cursor: pointer;
 }
 
+.user-card {
+    padding: 10px;
+    border: solid black 2px;
+    margin: 10px;
+}
+
