@@ -1,26 +1,16 @@
-import { useEffect, useState } from "react";
+import useRestaurantsMenu from "../utils/useRestaurantMenu";
 import ShimmerUI from "./ShimmerUI";
 import { useParams } from "react-router-dom";
 
 const RestaurantMenu = () => {
-  const [resMenuInfo, setResMenuInfo] = useState(null);
 
   // useParams is hook given by react-router-dom to read the params
   const { resId } = useParams();
 
-  // If the dependency array is empty [] => useEffect is called only during the initial rendering.
-  useEffect(() => {
-    fetchMenuItems();
-  }, []);
 
-  const fetchMenuItems = async () => {
-    const data = await fetch(
-      `https://www.swiggy.com/dapi/menu/pl?page-type=REGULAR_MENU&complete-menu=true&lat=17.4400802&lng=78.3489168&restaurantId=${resId}`
-    );
-
-    const menuData = await data.json();
-    setResMenuInfo(menuData);
-  };
+  // To have a code modularity we have created a customHook "useRestaurantsMenu" to fetch the Restaurant's Menu.
+  const resMenuInfo = useRestaurantsMenu(resId);
+  
   if (resMenuInfo === null) return <ShimmerUI />;
   const { name, cuisines, costForTwoMessage } =
     resMenuInfo?.data?.cards[2]?.card?.card?.info;

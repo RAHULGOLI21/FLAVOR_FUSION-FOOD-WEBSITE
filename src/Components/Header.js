@@ -1,9 +1,12 @@
 import appLogo from "../assets/appLogo.png";
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import useOnlineStatus from "../utils/useOnlineStatus";
 
 const HeaderLayout = () => {
   const [btnName, setBtnName] = useState("Login");
+  const onlineStatus = useOnlineStatus();
+
 
   // If the dependency array parameter is not given then => useEffect is called after every Component rendering.
   // If the dependency array is empty [] => useEffect is called only during the initial rendering.
@@ -14,7 +17,13 @@ const HeaderLayout = () => {
       <div className="nav-items">
         <ul>
           <li>
+             Online Status:{onlineStatus?"🟢":"🔴"}
+          </li>
+          <li>
             <Link to="/">Home</Link>
+          </li>
+          <li>
+            <Link to="/grocery">Grocery</Link>
           </li>
           <li>
             {/* If you click on the link on UI it will refresh the entire page. Go to inspect for better understanding */}
